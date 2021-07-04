@@ -1,0 +1,16 @@
+.table {
+  width: 100%;
+}
+
+.table__head {
+  width: 100%;
+  margin: 30px 0;
+}
+
+.table__cols {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 10px;
+}
+
+

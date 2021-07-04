@@ -1,0 +1,10 @@
+.page {
+  max-width: 1280px;
+  margin: 0 auto;
+  font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
+  color: #00072B
+}
+
+* {
+  /* outline: 1px green solid; */
+}

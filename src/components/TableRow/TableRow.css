@@ -1,0 +1,6 @@
+.table__rows {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 10px;
+  border-bottom: 1px #DFE2E9 solid;
+}
