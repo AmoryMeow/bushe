@@ -1,18 +1,11 @@
 import './TableCol.css';
 import Sort from '../Sort/Sort';
-import React from 'react';
 
 function TableCol({title, name, sort, handleSearch}) {
 
-  const [searchValue, setSearchValue] = React.useState("")
-  
   function handleChange(evt) {
-    setSearchValue(evt.target.value);
+    handleSearch(name, evt.target.value);
   }
-
-  React.useEffect(() => {
-    handleSearch(name, searchValue)
-  }, [searchValue]);
 
   return (
     <th className="table__col">
