@@ -2,7 +2,7 @@ import './Table.css';
 import TableCol from '../TableCol/TableCol';
 import TableRow from '../TableRow/TableRow';
 
-function Table({columns}) {
+function Table({data, columns, handleSearch}) {
   return (
 
     <table className="table">
@@ -16,16 +16,23 @@ function Table({columns}) {
               title={el.text}
               name={el.name}
               sort={el.sort}
+              handleSearch={handleSearch}
             />
           ))
         }
 
         </tr>
       </thead>
-      <TableRow/>
-      <TableRow/>
-      <TableRow/>
-      <TableRow/>
+
+      {
+        data.map((el,i) => (
+          <TableRow 
+            key={i}
+            data={el}
+          />
+        ))
+      }
+    
     </table>
   )
 }

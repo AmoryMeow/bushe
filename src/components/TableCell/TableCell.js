@@ -1,8 +1,8 @@
 import './TableCell.css';
 
-function TableCell() {
+function TableCell({text}) {
   return (
-    <td className="table__cell">hhjggh</td>
+    <td className="table__cell">{text}</td>
   )
 }
 

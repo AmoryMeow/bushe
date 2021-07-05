@@ -1,9 +1,9 @@
 import './Main.css';
 import Table from '../Table/Table';
 
-function Main({data, columns}) {
+function Main({data, columns, handleSearch}) {
   return (
-    <Table columns={columns}/>
+    <Table data={data} columns={columns} handleSearch={handleSearch}/>
   )
 }
 
