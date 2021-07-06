@@ -29,6 +29,7 @@ function Table({data, columns, handleSearch}) {
           <TableRow 
             key={i}
             data={el}
+            columns={columns}
           />
         ))
       }

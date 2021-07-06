@@ -18,11 +18,37 @@ function App() {
     {name: "agent", text: "Оператор", ind: 4, sort: ""},
   ]
 
+  function formateDate(unixDate) {
+    const date = new Date(unixDate * 1000);
+    
+    var dd = date.getDate();
+    if (dd < 10) dd = '0' + dd;
+
+    var mm = date.getMonth() + 1;
+    if (mm < 10) mm = '0' + mm;
+
+    var yy = date.getFullYear() ;
+    // if (yy < 10) yy = '0' + yy;
+
+    var h = date.getHours();
+    if (h < 10) h = '0' + h;
+
+    var m = date.getMinutes();
+    if (m < 10) m = '0' + m;
+
+    return `${dd}.${mm}.${yy} ${h}:${m}`
+  }
+
   React.useEffect(() => {
     api.getData()
     .then((res) => {
-      setData(res.data);
-      setFilterData(res.data);
+
+      const arr = res.data.map((item) => {
+        item[1] = formateDate(item[1]);
+        return item;
+      });
+      setData(arr);
+      setFilterData(arr);
     })
   },[]);
 
