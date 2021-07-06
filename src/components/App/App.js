@@ -9,13 +9,14 @@ function App() {
   const [data, setData] = React.useState([]);
   const [filterData, setFilterData] = React.useState([]);
   const [search, setSeach] = React.useState({});
+  const [sort, setSort] = React.useState({field: "", direction: ""});
 
   const columns = [
-    {name: "number", text: "Номер телефона", ind: 0, sort: ""},
-    {name: "calltime", text: "Время звонка", ind: 1, sort: "up"},
-    {name: "s_in_wait", text: "Время ожидания", ind: 2, sort: ""},
-    {name: "s_in_talk", text: "Время разговора", ind: 3, sort: ""},
-    {name: "agent", text: "Оператор", ind: 4, sort: ""},
+    {name: "number", text: "Номер телефона", ind: 0},
+    {name: "calltime", text: "Время звонка", ind: 1},
+    {name: "s_in_wait", text: "Время ожидания", ind: 2},
+    {name: "s_in_talk", text: "Время разговора", ind: 3},
+    {name: "agent", text: "Оператор", ind: 4},
   ]
 
   function formateDate(unixDate) {
@@ -49,6 +50,7 @@ function App() {
       });
       setData(arr);
       setFilterData(arr);
+      // sortData();
     })
   },[]);
 
@@ -61,11 +63,17 @@ function App() {
     }
   }
 
-  React.useEffect(() => {
-    
-    filter(data,search);
-
-  },[search])
+  function handleSort(name) {
+    if (sort.field === name) {
+      if (sort.direction === "up") {
+        setSort({...sort, direction: "down"});
+      } else {
+        setSort({...sort, direction: "up"});
+      }
+    } else {
+      setSort({...sort, field: name, direction: "down"});
+    }
+  }
 
   function filter(data, search) {
     const newData = data.filter((item) => {
@@ -79,10 +87,39 @@ function App() {
     setFilterData(newData);
   }
 
+  React.useEffect(() => {
+    filter(data,search);
+  },[search, data]);
+
+  function sortData() {
+    const col = columns.find((item) => {
+      return item.name === sort.field;
+    });
+    const index = col.ind;
+    const arr = filterData.sort((a,b) => {
+      if (sort.direction === "up") {
+        return a[index] - b[index];
+      } else {
+        return b[index] - a[index] ;
+      }
+    })
+    setFilterData(arr);
+  }
+
+  React.useEffect(() => {
+    sortData();
+  }, [sort]);
+
   return (
     <div className="page">
       <Header/>
-      <Main data={filterData} columns={columns} handleSearch={handleSearch}/>
+      <Main 
+        data={filterData} 
+        columns={columns} 
+        sort={sort}
+        handleSearch={handleSearch}
+        handleSort={handleSort}
+      />
     </div>
   );
 }

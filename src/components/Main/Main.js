@@ -1,9 +1,15 @@
 import './Main.css';
 import Table from '../Table/Table';
 
-function Main({data, columns, handleSearch}) {
+function Main({data, columns, sort, handleSearch, handleSort}) {
   return (
-    <Table data={data} columns={columns} handleSearch={handleSearch}/>
+    <Table 
+      data={data} 
+      columns={columns} 
+      sort={sort}
+      handleSearch={handleSearch} 
+      handleSort={handleSort}
+    />
   )
 }
 
