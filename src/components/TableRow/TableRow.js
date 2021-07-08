@@ -2,7 +2,7 @@ import './TableRow.css';
 import TableCell from '../TableCell/TableCell';
 import React from 'react';
 
-function TableRow({data, columns}) {
+function TableRow({data, columns, handleSearch}) {
   
   return (
     <tr className="table__rows">
@@ -12,6 +12,7 @@ function TableRow({data, columns}) {
               key={i}
               text={data[el.ind]}
               name={el.name}
+              handleSearch={handleSearch}
             />
           ))
         }

@@ -2,7 +2,7 @@ import './Table.css';
 import TableCol from '../TableCol/TableCol';
 import TableRow from '../TableRow/TableRow';
 
-function Table({data, columns, sort, handleSearch, handleSort}) {
+function Table({data, columns, sort, search, handleSearch, handleClear, handleSort}) {
   return (
 
     <table className="table">
@@ -16,7 +16,9 @@ function Table({data, columns, sort, handleSearch, handleSort}) {
               title={el.text}
               name={el.name}
               sort={sort}
+              search={search}
               handleSearch={handleSearch}
+              handleClear={handleClear}
               handleSort={handleSort}
             />
           ))
@@ -31,6 +33,7 @@ function Table({data, columns, sort, handleSearch, handleSort}) {
             key={i}
             data={el}
             columns={columns}
+            handleSearch={handleSearch}
           />
         ))
       }

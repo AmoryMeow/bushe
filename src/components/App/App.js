@@ -50,17 +50,15 @@ function App() {
       });
       setData(arr);
       setFilterData(arr);
-      // sortData();
     })
   },[]);
 
   function handleSearch(name, value) {
-    if (value) {
-      const regex = new RegExp(value,'gi');
-      setSeach({...search, [name]: regex});
-    } else {
-      setSeach({...search, [name]: value});
-    }
+    setSeach({...search, [name]: value});
+  }
+
+  function handleClear(name) {
+    setSeach({...search, [name]: ""})
   }
 
   function handleSort(name) {
@@ -79,7 +77,8 @@ function App() {
     const newData = data.filter((item) => {
       return columns.every((el) => {
         if (search[el.name]) {
-          return search[el.name].test(item[el.ind]);
+          const regex = new RegExp(search[el.name],'gi');
+          return regex.test(item[el.ind]);
         }
         return true;
       })
@@ -89,21 +88,24 @@ function App() {
 
   React.useEffect(() => {
     filter(data,search);
+    sortData();
   },[search, data]);
 
   function sortData() {
-    const col = columns.find((item) => {
-      return item.name === sort.field;
-    });
-    const index = col.ind;
-    const arr = filterData.sort((a,b) => {
-      if (sort.direction === "up") {
-        return a[index] - b[index];
-      } else {
-        return b[index] - a[index] ;
-      }
-    })
-    setFilterData(arr);
+    if (sort.field !== "" && sort.direction !== "") {
+      const col = columns.find((item) => {
+        return item.name === sort.field;
+      });
+      const index = col.ind;
+      const arr = filterData.sort((a,b) => {
+        if (sort.direction === "up") {
+          return a[index] - b[index];
+        } else {
+          return b[index] - a[index] ;
+        }
+      })
+      setFilterData(arr);
+    }
   }
 
   React.useEffect(() => {
@@ -117,7 +119,9 @@ function App() {
         data={filterData} 
         columns={columns} 
         sort={sort}
+        search={search}
         handleSearch={handleSearch}
+        handleClear={handleClear}
         handleSort={handleSort}
       />
     </div>

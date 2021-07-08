@@ -6,3 +6,7 @@
   line-height: 1.71;
   text-align: left;
 }
+
+.table__cell_type_number {
+  cursor: pointer;
+}
