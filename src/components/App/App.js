@@ -11,6 +11,7 @@ function App() {
   const [filterData, setFilterData] = React.useState([]);
   const [search, setSeach] = React.useState({});
   const [sort, setSort] = React.useState({field: "", direction: ""});
+  const [callsCount, setCallsCount] = React.useState(0);
 
   const columns = [
     {name: "number", text: "Номер телефона", ind: 0},
@@ -41,6 +42,9 @@ function App() {
   }
 
   React.useEffect(() => {
+    //подстановка тестовых данных для примера
+    setData(testData);
+    setFilterData(testData);
     api.getData()
     .then((res) => {
 
@@ -53,8 +57,6 @@ function App() {
     })
     .catch((err) => {
       console.log(err);
-      setData(testData);
-      setFilterData(testData);
     })
   },[]);
 
@@ -97,6 +99,10 @@ function App() {
     sortData();
   },[search, data]);
 
+  React.useEffect(() => {
+    setCallsCount(filterData.length);
+  }, [filterData]);
+
   function sortData() {
     if (sort.field !== "" && sort.direction !== "") {
       const col = columns.find((item) => {
@@ -120,7 +126,9 @@ function App() {
 
   return (
     <div className="page">
-      <Header/>
+      <Header
+        callsCount={callsCount}
+      />
       <Main 
         data={filterData} 
         columns={columns} 
