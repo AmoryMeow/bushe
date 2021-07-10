@@ -3,6 +3,7 @@ import Header from '../Header/Header';
 import Main from '../Main/Main';
 import api from '../../utils/api';
 import React from 'react';
+import { testData } from '../../utils/testData';
 
 function App() {
 
@@ -29,7 +30,6 @@ function App() {
     if (mm < 10) mm = '0' + mm;
 
     var yy = date.getFullYear() ;
-    // if (yy < 10) yy = '0' + yy;
 
     var h = date.getHours();
     if (h < 10) h = '0' + h;
@@ -50,6 +50,11 @@ function App() {
       });
       setData(arr);
       setFilterData(arr);
+    })
+    .catch((err) => {
+      console.log(err);
+      setData(testData);
+      setFilterData(testData);
     })
   },[]);
 
@@ -79,8 +84,9 @@ function App() {
         if (search[el.name]) {
           const regex = new RegExp(search[el.name],'gi');
           return regex.test(item[el.ind]);
+        } else {
+          return true;
         }
-        return true;
       })
     });
     setFilterData(newData);

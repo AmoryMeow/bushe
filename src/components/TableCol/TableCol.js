@@ -16,7 +16,9 @@ function TableCol({title, name, sort, search, handleSearch, handleClear, handleS
   }
 
   React.useEffect(() => {
-    setUseSearch(search[name] !== "")
+    if (search[name]) {
+      setUseSearch(search[name] !== "");
+    }
   }, [search])
 
   function handleClick(evt) {
