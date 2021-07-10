@@ -18,11 +18,14 @@ function TableCol({title, name, sort, search, handleSearch, handleClear, handleS
   React.useEffect(() => {
     if (search[name]) {
       setUseSearch(search[name] !== "");
+    } else {
+      setUseSearch(false);
     }
   }, [search])
 
   function handleClick(evt) {
     evt.preventDefault();
+    setUseSearch(false);
     handleClear(name); 
   }
 
