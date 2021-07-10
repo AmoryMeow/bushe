@@ -1,4 +1,5 @@
 import './Header.css';
+import imgSignin from '../../images/signin.png';
 
 function Header({callsCount}) {
     return(
@@ -10,6 +11,10 @@ function Header({callsCount}) {
             </div>
             <div className="header__stastic">
                 <p className="header__count">Статистика звонков: {callsCount}</p>
+            </div>
+            <div className="header__signin">
+                <img src={imgSignin} className="header__signin-img" alt="вход"/>
+                <p className="header__signin-text">Вход</p>
             </div>
         </header>
 
