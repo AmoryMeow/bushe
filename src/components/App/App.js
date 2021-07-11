@@ -4,6 +4,7 @@ import Main from '../Main/Main';
 import api from '../../utils/api';
 import React from 'react';
 import { testData } from '../../utils/testData';
+import Popup from '../Popup/Popup';
 
 function App() {
 
@@ -12,6 +13,7 @@ function App() {
   const [search, setSeach] = React.useState({});
   const [sort, setSort] = React.useState({field: "", direction: ""});
   const [callsCount, setCallsCount] = React.useState(0);
+  const [authIsOpen, setAuthIsOpen] = React.useState(false);
 
   const columns = [
     {name: "number", text: "Номер телефона", ind: 0},
@@ -124,21 +126,36 @@ function App() {
     sortData();
   }, [sort]);
 
+  function openAuth() {
+    setAuthIsOpen(true);
+  }
+
+  function closeAuth() {
+    setAuthIsOpen(false);
+  }
+
   return (
-    <div className="page">
-      <Header
-        callsCount={callsCount}
+    <>
+      <div className="page">
+        <Header
+          callsCount={callsCount}
+          openAuth={openAuth}
+        />
+        <Main 
+          data={filterData} 
+          columns={columns} 
+          sort={sort}
+          search={search}
+          handleSearch={handleSearch}
+          handleClear={handleClear}
+          handleSort={handleSort}
+        />
+      </div>
+      <Popup 
+        authIsOpen={authIsOpen}
+        closeAuth={closeAuth}
       />
-      <Main 
-        data={filterData} 
-        columns={columns} 
-        sort={sort}
-        search={search}
-        handleSearch={handleSearch}
-        handleClear={handleClear}
-        handleSort={handleSort}
-      />
-    </div>
+    </>
   );
 }
 

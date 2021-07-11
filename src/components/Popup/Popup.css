@@ -1,0 +1,59 @@
+.popup {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.popup_hidden {
+  visibility: hidden;
+}
+
+.auth {
+  width: 350px;
+  padding: 75px;
+  background-color: #FFFFFF;
+  border: 1px solid #DFE2E9;
+}
+
+.auth__title {
+  margin: 0;
+  padding: 20px 0;
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 1.3;
+  letter-spacing: -0.5;
+}
+
+.auth__form {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 15px;
+}
+
+.auth__input {
+  margin: 0;
+  padding: 10px;
+  outline: none;
+  border: none;
+  border-bottom: 1px #DFE2E9 solid;
+}
+
+.auth__input_type_login {
+
+}
+
+.auth__input_type_password {
+
+}
+
+.auth__submit {
+  padding: 10px;
+  cursor: pointer;
+}

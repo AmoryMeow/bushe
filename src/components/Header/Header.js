@@ -1,7 +1,12 @@
 import './Header.css';
 import imgSignin from '../../images/signin.png';
 
-function Header({callsCount}) {
+function Header({callsCount, openAuth}) {
+
+    function handleOnClick() {
+        openAuth();
+    }
+
     return(
 
         <header className="header">
@@ -12,7 +17,7 @@ function Header({callsCount}) {
             <div className="header__stastic">
                 <p className="header__count">Статистика звонков: {callsCount}</p>
             </div>
-            <div className="header__signin">
+            <div className="header__signin" onClick={handleOnClick}>
                 <img src={imgSignin} className="header__signin-img" alt="вход"/>
                 <p className="header__signin-text">Вход</p>
             </div>
